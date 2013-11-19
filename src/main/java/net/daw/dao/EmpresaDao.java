@@ -56,7 +56,8 @@ public class EmpresaDao {
             oMysql.desconexion();
         }
     }
-     public int getCount(ArrayList<FilterBean> hmFilter) throws Exception {
+
+    public int getCount(ArrayList<FilterBean> hmFilter) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
@@ -88,16 +89,7 @@ public class EmpresaDao {
                     oEmpresaBean.setNombrecontacto(oMysql.getOne("empresa", "nombrecontacto", oEmpresaBean.getId()));
                     oEmpresaBean.setEmailcontacto(oMysql.getOne("empresa", "emailcontacto", oEmpresaBean.getId()));
                     oEmpresaBean.setValidada(oMysql.getOne("empresa", "validada", oEmpresaBean.getId()));
-                    /*
-                     String strId_usuario = oMysql.getOne("empresa", "id_usuario", oEmpresaBean.getId());
-                     if (strId_usuario != null) {
-                     UsuarioBean oUsuarioBean = new UsuarioBean();
-                     oEmpresaBean.setUsuario(oUsuarioBean);
-                     oEmpresaBean.getUsuario().setId(Integer.parseInt(strId_usuario));
-                     UsuarioDao oUsuarioDao = new UsuarioDao(enumTipoConexion);
-                     oEmpresaBean.setUsuario(oUsuarioDao.get(oEmpresaBean.getUsuario()));
-                     }
-                     */
+
                 }
             } catch (Exception e) {
                 throw new Exception("EmpresaDao.getEmpresa: Error: " + e.getMessage());
@@ -131,15 +123,7 @@ public class EmpresaDao {
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "nombrecontacto", oEmpresaBean.getNombrecontacto());
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "emailcontacto", oEmpresaBean.getEmailcontacto());
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "validada", oEmpresaBean.getValidada());
-            /*
-             if (oEmpresaBean.getId_usuario() > 0) {
-             oMysql.updateOne(oEmpresaBean.getId_usuario(), "usuario", "password", oEmpresaBean.getPassword());
-             oMysql.updateOne(oEmpresaBean.getId_usuario(), "usuario", "login", oEmpresaBean.getLogin());
-             } else {
-             oMysql.setNull(oEmpresaBean.getId_usuario(), "usuario", "password");
-             oMysql.setNull(oEmpresaBean.getId_usuario(), "usuario", "login");
-             }
-             */
+
             oMysql.commitTrans();
         } catch (Exception e) {
             oMysql.rollbackTrans();
