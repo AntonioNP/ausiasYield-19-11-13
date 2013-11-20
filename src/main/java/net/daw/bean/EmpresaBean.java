@@ -20,7 +20,7 @@ public class EmpresaBean {
     private String nombrecontacto = "";
     private String emailcontacto = "";
     private String validada = "";
-    private UsuarioBean usuario = null;
+    private UsuarioBean usuario;
 
     public EmpresaBean() {
 

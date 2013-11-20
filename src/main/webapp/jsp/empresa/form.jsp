@@ -38,6 +38,8 @@
         nombrecontacto = oEmpresaBean.getNombrecontacto();
         emailcontacto = oEmpresaBean.getEmailcontacto();
         validada = oEmpresaBean.getValidada();
+        login = oEmpresaBean.getUsuario().getLogin();
+        password = oEmpresaBean.getUsuario().getPassword();
 
     }
     if (oContexto.getMetodo().equals("view")) {
