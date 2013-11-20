@@ -19,6 +19,8 @@
     String nombrecontacto = "";
     String emailcontacto = "";
     String validada = "";
+    String login = "";
+    String password = "";
 
     if (oContexto.getMetodo().equals("update") || oContexto.getMetodo().equals("view")) {
         EmpresaBean oEmpresaBean = (EmpresaBean) oContexto.getParametro();
@@ -144,6 +146,18 @@
                             out.print("selected");
                         }%>>No</option>
                 </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="login">Usuario: </label> 
+            <div class="controls">
+                <input <%=strControlEnabled%> id="login" name="login" type="text" size="30" maxlength="50" value="<%=login%>" /><br />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">Contraseña: </label> 
+            <div class="controls">
+                <input <%=strControlEnabled%> id="password" name="password" type="text" size="30" maxlength="50" value="<%=password%>" /><br />
             </div>
         </div>
         <div class="control-group">

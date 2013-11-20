@@ -90,6 +90,15 @@ public class EmpresaDao {
                     oEmpresaBean.setEmailcontacto(oMysql.getOne("empresa", "emailcontacto", oEmpresaBean.getId()));
                     oEmpresaBean.setValidada(oMysql.getOne("empresa", "validada", oEmpresaBean.getId()));
 
+                    String strId_usuario = oMysql.getOne("alumno", "id_usuario", oEmpresaBean.getId());
+                    if (strId_usuario != null) {
+                        UsuarioBean oUsuarioBean = new UsuarioBean();
+                        oEmpresaBean.setUsuario(oUsuarioBean);
+                        oEmpresaBean.getUsuario().setId(Integer.parseInt(strId_usuario));
+                        UsuarioDao oUsuarioDao = new UsuarioDao(enumTipoConexion);
+                        oEmpresaBean.setUsuario(oUsuarioDao.get(oEmpresaBean.getUsuario()));
+                    }
+                    
                 }
             } catch (Exception e) {
                 throw new Exception("EmpresaDao.getEmpresa: Error: " + e.getMessage());
