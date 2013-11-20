@@ -90,7 +90,7 @@ public class EmpresaDao {
                     oEmpresaBean.setEmailcontacto(oMysql.getOne("empresa", "emailcontacto", oEmpresaBean.getId()));
                     oEmpresaBean.setValidada(oMysql.getOne("empresa", "validada", oEmpresaBean.getId()));
 
-                    String strId_usuario = oMysql.getOne("alumno", "id_usuario", oEmpresaBean.getId());
+                    String strId_usuario = oMysql.getOne("empresa", "id_usuario", oEmpresaBean.getId());
                     if (strId_usuario != null) {
                         UsuarioBean oUsuarioBean = new UsuarioBean();
                         oEmpresaBean.setUsuario(oUsuarioBean);
