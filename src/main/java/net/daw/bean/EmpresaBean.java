@@ -20,10 +20,11 @@ public class EmpresaBean {
     private String nombrecontacto = "";
     private String emailcontacto = "";
     private String validada = "";
-    private UsuarioBean usuario = null;
+    private UsuarioBean usuario;
 
     public EmpresaBean() {
-
+        this.usuario = new UsuarioBean();
+        this.usuario.setId(0);
     }
 
     public UsuarioBean getUsuario() {
@@ -36,6 +37,8 @@ public class EmpresaBean {
 
     public EmpresaBean(Integer id) {
         this.id = id;
+        this.usuario = new UsuarioBean();
+        this.usuario.setId(0);
     }
 
     public int getId() {

@@ -98,7 +98,7 @@ public class EmpresaDao {
                         UsuarioDao oUsuarioDao = new UsuarioDao(enumTipoConexion);
                         oEmpresaBean.setUsuario(oUsuarioDao.get(oEmpresaBean.getUsuario()));
                     }
-                    
+
                 }
             } catch (Exception e) {
                 throw new Exception("EmpresaDao.getEmpresa: Error: " + e.getMessage());
@@ -116,10 +116,16 @@ public class EmpresaDao {
             oMysql.conexion(enumTipoConexion);
             oMysql.initTrans();
 
+          //  UsuarioBean oUsuarioBean = new UsuarioBean();
+            if (oEmpresaBean.getUsuario() == 0) {
+               oUsuarioBean.setId(oMysql.insertOne("usuario"));
+             }
+            //oMysql.updateOne(oEmpresaBean.getId(), "usuario", "login", oUsuarioBean.getLogin());
+            //oMysql.updateOne(oEmpresaBean.getId(), "usuario", "password", oUsuarioBean.getPassword());
             if (oEmpresaBean.getId() == 0) {
                 oEmpresaBean.setId(oMysql.insertOne("empresa"));
             }
-            oMysql.updateOne(oEmpresaBean.getId(), "empresa", "id_usuario", Integer.toString(oEmpresaBean.getId_usuario()));
+            oMysql.updateOne(oEmpresaBean.getId(), "empresa", "id_usuario", Integer.toString(oEmpresaBean.getUsuario().getId()));
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "nombre", oEmpresaBean.getNombre());
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "cif", oEmpresaBean.getCif());
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "direccion", oEmpresaBean.getDireccion());
