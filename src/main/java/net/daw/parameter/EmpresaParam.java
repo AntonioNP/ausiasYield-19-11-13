@@ -73,10 +73,10 @@ public class EmpresaParam {
                 oEmpresa.setValidada(request.getParameter("validada"));
             }
             if ((request.getParameter("login") != null)) {
-                oUsuarioBean.setLogin(request.getParameter("login"));
+                oEmpresa.getUsuario().setLogin(request.getParameter("login"));
             }
             if ((request.getParameter("password") != null)) {
-                oUsuarioBean.setPassword(request.getParameter("password"));
+                oEmpresa.getUsuario().setPassword(request.getParameter("password"));
             }
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Controller: Error: Load: Formato de datos en parámetros incorrecto " + e.getMessage());

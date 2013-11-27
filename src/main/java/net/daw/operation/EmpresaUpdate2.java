@@ -26,21 +26,21 @@ public class EmpresaUpdate2 implements Operation {
         EmpresaDao oEmpresaDao = new EmpresaDao(oContexto.getEnumTipoConexion());
         EmpresaParam oEmpresaParam = new EmpresaParam(request);
         oEmpresaBean = oEmpresaParam.loadId(oEmpresaBean);
-
+/*
         UsuarioBean oUsuarioBean = new UsuarioBean();
         UsuarioDao oUsuarioDao = new UsuarioDao(oContexto.getEnumTipoConexion());
         UsuarioParam oUsuarioParam = new UsuarioParam(request);
         oUsuarioBean = oUsuarioParam.loadId(oUsuarioBean);
-
+*/
         try {
             oEmpresaBean = oEmpresaParam.load(oEmpresaBean);
-            oUsuarioBean = oUsuarioParam.load(oUsuarioBean);
+    //        oUsuarioBean = oUsuarioParam.load(oUsuarioBean);
         } catch (NumberFormatException e) {
             return "Tipo de dato incorrecto en uno de los campos del formulario";
         }
         try {
             oEmpresaDao.set(oEmpresaBean);
-            oUsuarioDao.set(oUsuarioBean);
+    //        oUsuarioDao.set(oUsuarioBean);
         } catch (Exception e) {
             throw new ServletException("EmpresaController: Update Error: Phase 2: " + e.getMessage());
         }

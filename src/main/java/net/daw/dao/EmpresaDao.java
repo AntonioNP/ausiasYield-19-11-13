@@ -76,6 +76,15 @@ public class EmpresaDao {
                 if (!oMysql.existsOne("empresa", oEmpresaBean.getId())) {
                     oEmpresaBean.setId(0);
                 } else {
+                    
+                   UsuarioBean oUsuarioBean = new UsuarioBean();
+
+                    oUsuarioBean.setId(Integer.parseInt(oMysql.getOne("empresa", "id_usuario", oEmpresaBean.getId())));
+
+                    UsuarioDao oUsuarioDao = new UsuarioDao(enumTipoConexion);
+                    oUsuarioBean = oUsuarioDao.get(oUsuarioBean);
+                    oEmpresaBean.setUsuario(oUsuarioBean);
+                    
                     oEmpresaBean.setId_usuario(Integer.parseInt(oMysql.getOne("empresa", "id_usuario", oEmpresaBean.getId())));
                     oEmpresaBean.setNombre(oMysql.getOne("empresa", "nombre", oEmpresaBean.getId()));
                     oEmpresaBean.setCif(oMysql.getOne("empresa", "cif", oEmpresaBean.getId()));
@@ -89,16 +98,6 @@ public class EmpresaDao {
                     oEmpresaBean.setNombrecontacto(oMysql.getOne("empresa", "nombrecontacto", oEmpresaBean.getId()));
                     oEmpresaBean.setEmailcontacto(oMysql.getOne("empresa", "emailcontacto", oEmpresaBean.getId()));
                     oEmpresaBean.setValidada(oMysql.getOne("empresa", "validada", oEmpresaBean.getId()));
-
-                    String strId_usuario = oMysql.getOne("empresa", "id_usuario", oEmpresaBean.getId());
-                    if (strId_usuario != null) {
-                        UsuarioBean oUsuarioBean = new UsuarioBean();
-                        oEmpresaBean.setUsuario(oUsuarioBean);
-                        oEmpresaBean.getUsuario().setId(Integer.parseInt(strId_usuario));
-                        UsuarioDao oUsuarioDao = new UsuarioDao(enumTipoConexion);
-                        oEmpresaBean.setUsuario(oUsuarioDao.get(oEmpresaBean.getUsuario()));
-                    }
-
                 }
             } catch (Exception e) {
                 throw new Exception("EmpresaDao.getEmpresa: Error: " + e.getMessage());
@@ -116,15 +115,15 @@ public class EmpresaDao {
             oMysql.conexion(enumTipoConexion);
             oMysql.initTrans();
 
-          //  UsuarioBean oUsuarioBean = new UsuarioBean();
-            if (oEmpresaBean.getUsuario() == 0) {
-               oUsuarioBean.setId(oMysql.insertOne("usuario"));
-             }
-            //oMysql.updateOne(oEmpresaBean.getId(), "usuario", "login", oUsuarioBean.getLogin());
-            //oMysql.updateOne(oEmpresaBean.getId(), "usuario", "password", oUsuarioBean.getPassword());
             if (oEmpresaBean.getId() == 0) {
                 oEmpresaBean.setId(oMysql.insertOne("empresa"));
             }
+            UsuarioDao oUsuarioDao = new UsuarioDao(enumTipoConexion);
+            oUsuarioDao.set(oEmpresaBean.getUsuario());
+
+            
+            oEmpresaBean.setUsuario(oUsuarioDao.getFromLogin(oEmpresaBean.getUsuario()));
+            
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "id_usuario", Integer.toString(oEmpresaBean.getUsuario().getId()));
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "nombre", oEmpresaBean.getNombre());
             oMysql.updateOne(oEmpresaBean.getId(), "empresa", "cif", oEmpresaBean.getCif());
