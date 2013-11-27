@@ -23,7 +23,8 @@ public class EmpresaBean {
     private UsuarioBean usuario;
 
     public EmpresaBean() {
-
+        this.usuario = new UsuarioBean();
+        this.usuario.setId(0);
     }
 
     public UsuarioBean getUsuario() {
@@ -36,6 +37,8 @@ public class EmpresaBean {
 
     public EmpresaBean(Integer id) {
         this.id = id;
+        this.usuario = new UsuarioBean();
+        this.usuario.setId(0);
     }
 
     public int getId() {

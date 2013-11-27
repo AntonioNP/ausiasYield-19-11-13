@@ -24,6 +24,7 @@
 
     if (oContexto.getMetodo().equals("update") || oContexto.getMetodo().equals("view")) {
         EmpresaBean oEmpresaBean = (EmpresaBean) oContexto.getParametro();
+        //UsuarioBean oUsuarioBean = (UsuarioBean) oContexto.getParametro();
         id = oEmpresaBean.getId();
         id_usuario = oEmpresaBean.getId_usuario();
         nombre = oEmpresaBean.getNombre();
@@ -64,12 +65,14 @@
         <input type="hidden" name="class" value="empresa" /> 
         <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>" /> 
         <input type="hidden" name="phase" value="2" />
+        <!--
         <div class="control-group">
             <label class="control-label" for="id_usuario">Id de Empresa: </label> 
             <div class="controls">
                 <input <%=strControlEnabled%> id="id_usuario" name="id_usuario" type="text" size="30" maxlength="50" autofocus="autofocus" value="<%=id_usuario%>" /><br />
             </div>
         </div>
+        -->
         <div class="control-group">
             <label class="control-label" for="nombre">Nombre: </label> 
             <div class="controls">
